@@ -1,0 +1,1 @@
+g++ TablaVariables.cpp node.cpp parser.tab.c lex.yy.c -std=c++11 -lfl -lm -o main
