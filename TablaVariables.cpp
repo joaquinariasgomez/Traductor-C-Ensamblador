@@ -6,7 +6,7 @@
 
 using namespace std;
 
-TablaVariables::TablaVariables() {cout << "Hola";}
+TablaVariables::TablaVariables() {}
 
 void TablaVariables::addVariable(string t, string id, string v){
 	tipos.push_back(t);
