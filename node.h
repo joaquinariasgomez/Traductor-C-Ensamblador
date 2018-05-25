@@ -10,6 +10,7 @@
 
 using namespace std;
 extern ofstream f;
+extern int num_linea;
 
 namespace Tree{
 	class Node{
@@ -27,16 +28,18 @@ namespace Tree{
 
 	class NodoId : public Node{
 	public:
-		std::string id_;
+		string id_;
+		bool es_direccion;  
 
-		NodoId(std::string s): id_(s) {}
+		NodoId(string s, bool b=false): id_(s), es_direccion(b) {}
 	};
 
 	class NodoConstante : public Node{
 	public:
 		std::string val_;
+		std::string type_;
 
-		NodoConstante(std::string s): val_(s) {}
+		NodoConstante(std::string s, std::string t): val_(s), type_(t) {}
 	};
 
 	class NodoTipo : public Node{
@@ -84,15 +87,15 @@ namespace Tree{
 
 		NodoDefinicion(NodoTipo* n1, NodoId* n2, Node* n3=NULL): n1_(n1), n2_(n2), n3_(n3) {}
 
-		void declarar(TablaVariables& tab, bool b);
-		void instanciar(TablaVariables& tab1, TablaVariables& tab2, TablaVariables& tab3);
+		void declarar(TablaVariables& tab, bool b, vector<string> v);
+		void instanciar(TablaVariables& tab1, TablaVariables& tab2, TablaVariables& tab3, vector<string> v);
 	};
 
 	class NodoFuncion : public Node{
 	public:
 		std::string tipo_;
 
-		NodoFuncion(std::string s, TablaVariables& tab1, TablaVariables& tab2);
+		NodoFuncion(std::string s, TablaVariables& locales);
 
 	};
 
@@ -103,8 +106,7 @@ namespace Tree{
 
 	class NodoPush : public Node{
 	public:
-		NodoPush(std::string s, vector<string>& v, TablaVariables& tab1, TablaVariables& tab2, TablaVariables& tab3);
-		NodoPush(int i, vector<string>& v);
+		NodoPush(Node* n, vector<string>& v, TablaVariables& tab1, TablaVariables& tab2, TablaVariables& tab3);
 	};
 
 	class NodoPushScanf : public Node{

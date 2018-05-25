@@ -13,43 +13,32 @@ using namespace std;
 
 class TablaVariables{
 	public:
-		TablaVariables();
+		TablaVariables(){}
 
 		/*Añade una variable introduciendo su tipo, id y valor.
 		Cuando no se quiera iniciar con un valor, se añade null
 		por defecto.*/
-		void addVariable(string t, string id, string v="null");
-
-		/*elimina una variable introduciendo su id*/
-		void eraseVariable(string id);
-
-		/*modifica el valor de una variable introduciendo su id y el nuevo valor*/
-		void modifyValue(string id, string v);
-
-		/*modifica el tipo de una variable introduciendo su id y el nuevo tipo*/
-		void modifyType(string id, string t);
-
-		/*devuelve el valor de una variable introduciendo su id*/
-		string getValue(string id);
-
-		/*devuelve el tipo de una variable introduciendo su id*/
-		string getType(string id);
-
-		/*imprime toda la tabla de variables para consultar su estado actual*/
-		void printTabla();
+		void addVariable(string t, string id, vector<string> v);
 
 		/*devuelve el indice del id que recibe*/
 		int getIndex(string id);
 
+		/*devuelve el tipo del indice que recibe*/
+		string getType(int i);
+
+		/*devuelve el id del indice que recibe*/
+		string getId(int i);
+
+		/*devuelve el vector de dimensiones*/
+		vector<string> getDimensions(int i);
+
 		/*reinicia toda la tabla*/
 		void clearAll();
 
-		/*da la vuelta a la tabla*/
-		void reverseAll();
 	private:
 		vector<string> tipos;
 		vector<string> ids;
-		vector<string> valores;
+		vector<vector<string> > valores;
 };
 
 

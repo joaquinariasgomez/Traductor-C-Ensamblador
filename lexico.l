@@ -3,6 +3,7 @@
 	#include<map>
 	#include<string>
 	#include "parser.tab.h"
+	#include "node.h"
 
 	using namespace std;
 %}
@@ -12,10 +13,6 @@
 %x comment2
 
 INT		"int"
-FLOAT		"float"
-DOUBLE		"double"
-CHAR		"char"
-CONST		"const"
 TRUE    	"true"
 FALSE   	"false"
 IF		"if"
@@ -41,22 +38,20 @@ GTE		">="
 
 <comment>[^*\n]*	;	//eat anything that's not a '*'
 <comment>"*"+[^*/\n]*	;	//eat up '*'s not followed by '/'s
-<comment>\n 		;
+<comment>\n 		{num_linea++;}
 <comment>"*"+"/"	BEGIN(INITIAL);
 
 "//"		BEGIN(comment2);
 
 <comment2>[^\n]	;	/*eat anything that's not a \n */
-<comment2>\n 		{BEGIN(INITIAL);}	//end
+<comment2>\n 		{num_linea++; BEGIN(INITIAL);}	//end
 
 
-[ \t\n\r]+ 	; /*se come los espacios en blanco */
+[ \t\r]+ 	; /*se come los espacios en blanco */
+
+[\n]		{num_linea++;}
 
 {INT}			{yylval.nombre = new string(yytext); return INT;}
-{FLOAT}			{yylval.nombre = new string(yytext); return FLOAT;}
-{DOUBLE}		{yylval.nombre = new string(yytext); return DOUBLE;}
-{CHAR}			{yylval.nombre = new string(yytext); return CHAR;}
-{CONST}			{yylval.nombre = new string(yytext); return CONST;}
 
 {TRUE}			{yylval.nombre = new string(yytext); return TRUE;}
 {FALSE}			{yylval.nombre = new string(yytext); return FALSE;}
@@ -86,9 +81,11 @@ GTE		">="
 {GTE}			{yylval.nombre = new string(yytext); return GTE;}
 
 [a-zA-Z_][a-zA-Z0-9_]* 	{yylval.nombre = new string(yytext); return ID;}
-"'"[a-zA-Z]"'"			{yylval.nombre = new string(yytext); return CARACTER;}
-"\""[a-zA-Z0-9 %=();{}\+\-\*\/\[\]_]*"\""	{yylval.nombre = new string(yytext); return STRING;}
-[0-9]+|[0-9]*\.[0-9]+	{yylval.nombre = new string(yytext); return NUM;}
+"'"[0-9a-zA-Z]"'"			{yylval.nombre = new string(yytext); return CARACTER;}
+"\""[a-zA-Z0-9 %=():?¿!¡@#~$;{}\\\+\-\*\/\[\]_]*"\""	{yylval.nombre = new string(yytext); return STRING;}
+[0-9]+	{yylval.nombre = new string(yytext); return NUM;}
+[0-9]*\.[0-9]+"f"	{yylval.nombre = new string(yytext); return FLOAT;}
+[0-9]+|[0-9]*\.[0-9]+	{yylval.nombre = new string(yytext); return DOUBLE;}
 
 [=(),;{}\+\-\*\/\[\]&]		return *yytext;
 .		{cout<<"filtrado caracter ("<<yytext<<")\n";}/* se come los caracteres que no se hayan tratado */
