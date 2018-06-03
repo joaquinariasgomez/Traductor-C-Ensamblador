@@ -1,3 +1,5 @@
+
+
 int fact(int n) {
     if(n<=1) {
         n=1;
@@ -15,3 +17,9 @@ int main() {
     printf("El factorial = %d\n", fact(numero));
     return 0;
 }
+
+
+
+
+
+

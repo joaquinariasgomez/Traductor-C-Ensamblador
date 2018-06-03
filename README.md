@@ -1,2 +1,2 @@
 # Traductor_Cpp_Ensamblador
-Traductor de C++ a ensamblador
+Traductor from C to assembler done in collaboration with @aaronariasperez
