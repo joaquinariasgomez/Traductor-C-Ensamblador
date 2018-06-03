@@ -1,2 +1,5 @@
-# Traductor_Cpp_Ensamblador
-Traductor from C to assembler done in collaboration with @aaronariasperez
+# C subset to assembly translator.
+
+Autors:
+- José Joaquín Arias Gómez-Calcerrada [@empiremay](https://github.com/empiremay)
+- Aarón Arias Pérez [@aaronariasperez](https://github.com/aaronariasperez)
