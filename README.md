@@ -18,5 +18,5 @@ You can also compile it manually:
 - g++ TablaVariables.cpp node.cpp parser.tab.c lex.yy.c -std=c++11 -lfl -lm -o main
 
 There are two input examples inside the project (input_example1.c and input_example2.c) so you can try it executing:
-./script # to compile (or you can do it manually)
-./main < input_example1.c # also try with input_example2.c
+- ./script # to compile (or you can do it manually)
+- ./main < input_example1.c # also try with input_example2.c
