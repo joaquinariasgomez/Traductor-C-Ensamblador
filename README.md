@@ -11,7 +11,7 @@ This translator is made using Bison/Yacc and Flex/Lex. We designed an ascendent 
 - g++ (c++11 standard)
 
 **Compilation and execution:**
-There is a script to compile the project in Linux. 
+There is a script to compile the project in Linux.
 You can also compile it manually:
 ```
 flex lexico.l
@@ -23,3 +23,4 @@ There are two input examples inside the project (input_example1.c and input_exam
 ./script #to compile (or you can do it manually)
 ./main < input_example1.c #also try with input_example2.c
 ```
+Last line will generate a ejer.s assembler code of the selected file.
